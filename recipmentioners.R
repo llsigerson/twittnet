@@ -98,8 +98,7 @@ recipmentioners<- function(user,preset.contacts=NULL,...){
   mentions$min<-apply(mentions[,2:3], 1, min)
   mentions<- mentions[which(mentions$min>1),]
   return(mentions)
-  
-}
+  }
 
 
 
