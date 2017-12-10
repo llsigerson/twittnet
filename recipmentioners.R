@@ -6,6 +6,9 @@
 
 
 recipmentioners<- function(user,preset.contacts=NULL,...){
+  if(!exists("archive")){
+    archive<<- get_timeline("25073877")[0,]
+  }
   #first, check for some abnormal users
   userinfo<- lookup_users(user)
   if(ncol(userinfo)==0){return(NA)}
@@ -97,8 +100,7 @@ recipmentioners<- function(user,preset.contacts=NULL,...){
   return(mentions)
   
 }
-#archive<- get_timeline("llsigerson")[0,]
-#results<- getreciprocators("llsigerson", startday=Sys.Date()-30)
+
 
 
 
