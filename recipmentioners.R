@@ -1,11 +1,5 @@
-#New function: identify all other users who reciprocate 
-#at least two mentions (including reply or retweet)
-#with the given user: requires gettweets and getmentionees
-#note that this version can only be used within the sociogram builder (with replies)
-#note that this has been tested and found to achieve the exact same results as the original
 
-
-recipmentioners<- function(user,preset.contacts=NULL,...){
+recipmentioners<- function(user,preset.contacts=NULL, min.tie=2,...){
   if(!exists("archive")){
     archive<<- get_timeline("25073877")[0,]
   }
@@ -47,8 +41,8 @@ recipmentioners<- function(user,preset.contacts=NULL,...){
   if(nrow(mentions)==0){return(as.tibble(matrix(nrow=0,ncol=0)))}
   }
   
-  #remove contacts who were only mentioned once
-  mentions<- mentions[mentions$mentions_given>1,]
+  #remove contacts who were mentioned few than the minimum tie strength
+  mentions<- mentions[mentions$mentions_given>=min.tie,]
   if(nrow(mentions)==0){return(as.tibble(matrix(nrow=0,ncol=0)))}
   
   #remove private  and suspended accounts
@@ -90,13 +84,13 @@ recipmentioners<- function(user,preset.contacts=NULL,...){
           }
         }
      #If the mentions received column is less than two, remove that contact's tweets from the archive
-       if(mentions$mentions_received[i]<2){
+       if(mentions$mentions_received[i]<min.tie){
         archive<<- archive[-which(archive$user_id==contact),]
         }
     }
     }
   mentions$min<-apply(mentions[,2:3], 1, min)
-  mentions<- mentions[which(mentions$min>1),]
+  mentions<- mentions[which(mentions$min>=min.tie),]
   return(mentions)
   }
 
