@@ -1,5 +1,11 @@
-#this function reformats the outputs of get_timeline (from rtweet) and get_tweets (from twittnet)
-#it makes them into a clean dataframe that can be written to a csv
+#' reformat_tweets
+#' 
+#' Reformats the tibbles containing tweets from functions in either rtweet or twittnet and
+#' makes them into a clean dataframe that can be written to a csv or other file
+#' @param tweets a tibble of tweets
+#' @return a dataframe of tweets 
+#' @export
+
 reformat_tweets<- function(tweets){
   newtweets<-tweets
   newtweets$hashtags<- sapply(tweets$hashtags, paste, collapse= " ")
