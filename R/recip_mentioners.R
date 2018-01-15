@@ -41,7 +41,7 @@ recip_mentioners<- function(user,archive=NULL,preset.contacts=NULL, min.tie=2, v
   
   createMentions<- function(tweets){
     # creates an initial tibble of mentions and cleans up the contact list
-    mentionees= getmentionees(tweets)
+    mentionees= get_mentionees(tweets)
     mentions= tibble("contact"= as.character(mentionees$user_ID), "mentions_given"= mentionees$count, 
                      "mentions_received"= numeric(nrow(mentionees)))
     #if contacts are pre-specified, restrict the mentions dataframe to them
@@ -86,7 +86,7 @@ recip_mentioners<- function(user,archive=NULL,preset.contacts=NULL, min.tie=2, v
       contact.tweets<- archive[archive$user_id==contact,]
       #If the user was mentioned by the contact, update the mentions_received column accordingly
       if(nrow(contact.tweets)>0){
-        contact.mentionees<-getmentionees(contact.tweets)
+        contact.mentionees<-get_mentionees(contact.tweets)
         if(nrow(contact.mentionees)>0){
           if(user%in%contact.mentionees$user_ID){
             mentions$mentions_received[i]<- contact.mentionees$count[which(contact.mentionees$user_ID==user)]
