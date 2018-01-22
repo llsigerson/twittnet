@@ -12,7 +12,7 @@
 #' 
 #' @export
 
-problem_account_check<- function(users){
+problem_account_check<- function(users, return_info=F){
   if(length(users)>5000){
     stop("More than 5000 users, cannot generate accurate results")
   }
@@ -38,6 +38,9 @@ problem_account_check<- function(users){
         account.problems$No.friends.or.followers[loc]<-TRUE
       }
     }
+  }
+  if(return_info){
+    return(list("account.problems"=account.problems, "user.info"=user.info))
   }
   return(account.problems)
 }
