@@ -61,7 +61,7 @@ recip_mentioners<- function(user,archive=NULL,preset.contacts=NULL, min.tie=2, v
     #given a tibble of mentions, updates the mentions received colum
     #by checking tweets of all the listed contacts
     #also outputs updated archive
-    if(verbose){print(c("Number of contacts:", nrow(mentions)))}
+    if(verbose){print(c("Expected Number of contacts:", nrow(mentions)))}
     for (i in 1:nrow(mentions)){
       if(verbose){print(c("contact number:", i, "user ID:", mentions$contact[i]))}
       

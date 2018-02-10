@@ -1,6 +1,24 @@
+#' recip_followers_network
+#' 
+#' Maps out a user's 1.5 level ego network (who are their contacts, and whether these contacts 
+#' know each other), based on reciprocated following. Repeatedly uses the recip_followers function to accomplish this.
+#' Tie strength is binary: either two users are connected or they are unconnected.
+#' 
+#' @param user a user screen name or ID
+#' @param max.contacts the maximum number of contacts (reciprocated followers) to process. If there are more than this
+#' number, than a random sample of the contacts (n=max.contacts) will be used.
+#' @param verbose whether the function should provide updates on its progress.
+#' 
+#' @return user: the user ID of the original user
+#' @return ncontacts: how many contacts the user has
+#' @return funcstart: start time of function
+#' @return funcstop: stop time of function
+#' @return account.problems: information about potential problems with the account
+#' @return sociogram: a matrix with identical rows and columns showing the connections among the user and their
+#' contacts. The user's connection with themselves is marked as "self".
+
     
-    
-    #Function to build sociomatrix based on reciprocating following (dependent on recipfollowers function)
+
    
 recip_followers_network<- function(user, max.contacts=500, verbose=F){
     funcstart<- Sys.time()
@@ -84,7 +102,7 @@ recip_followers_network<- function(user, max.contacts=500, verbose=F){
     
    
     return(list("user"=user,"ncontacts"=ncontacts, "funcstart"=funcstart, "funcstop"=Sys.time(), 
-                "error"="None", "sociogram"=sociogram))
+                "Account.problems"="None", "sociogram"=sociogram))
     }
 
     

@@ -1,3 +1,19 @@
+#' recip_followers
+#' 
+#' Finds the reciprocated followers of a given user. Handles rate limits and various problematic accounts, including
+#' mistaken ID's, private accounts, suspended accounts, or accounts with too many friends or followers to process
+#' in a timely way (this can be defined by the user).
+#' @param user a user screen name or ID
+#' @param max.followers the maximum number of followers an account can have before it's considered a "large account" 
+#' and not processed.
+#' @param max.friends similar to max.followers, but for friends.
+#' @param verbose whether the function should provide updates on its progress.
+#' 
+#' @return a character vector of user IDs who are reciprocated followers with the user. If this vector has a length
+#' of 0, then the user has no reciprocated followers
+
+
+
 recip_followers= function(user,  max.followers=300000, max.friends=20000, verbose=F){
   #sub functions: modified versions of get_friends and get_followers that handle rate limit issues
   #they wait, then try again until a good result is returned

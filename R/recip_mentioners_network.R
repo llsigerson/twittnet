@@ -47,30 +47,31 @@ recip_mentioners_network<- function(user, verbose=F, archive.to.csv=F, sleepy=F,
   
   
   funcstart<- Sys.time()
-  #if screen name, convert to user ID
-  if(is.na(suppressWarnings(as.numeric(user)))){
-    user<- lookup_users(user)$user_id
-  }
-   
+  
   #First, check if the specified account is a problem account and return appropriate output if so
   user.problems<- problem_account_check(user)
   if(TRUE%in%user.problems[,2:4]){
     if(verbose){print(user.problems)}
-    if(user.problems$No.tweets){
-      return(list("user"=user, "ncontacts"=0, "funcstart"=funcstart, "funcstop"=Sys.time(),
-                  "account.problems"=user.problems,"sociogram"= matrix(NA,0,0),  
-             "archive"=get_timeline("25073877")[0,]))
-    }
-    else{
+    if(user.problems$Wrong.or.Suspended|user.problems$Private){
       return(list("user"=user, "ncontacts"=NA, "funcstart"=funcstart, "funcstop"=Sys.time(),
                   "account.problems"=user.problems,"sociogram"= matrix(NA,0,0),  
                   "archive"=get_timeline("25073877")[0,]))
     }
+    else{
+      return(list("user"=user, "ncontacts"=0, "funcstart"=funcstart, "funcstop"=Sys.time(),
+                  "account.problems"=user.problems,"sociogram"= matrix(NA,0,0),  
+                  "archive"=get_timeline("25073877")[0,]))
+    }
+  }
+  #if screen name, convert to user ID
+  if(is.na(suppressWarnings(as.numeric(user)))){
+    user<- lookup_users(user)$user_id
   }
   
+  
   #then, get user's mentions and store the results
-  print("Obtaining user's mentions")
-  mentionspre<- recip_mentioners(user, verbose=T, sleepy=sleepy,...)
+  print("No problems found, obtaining user's mentions")
+  mentionspre<- recip_mentioners(user, verbose=verbose, sleepy=sleepy,...)
   mentions<- mentionspre$mentions
   archive<- mentionspre$archive
   
@@ -92,7 +93,7 @@ recip_mentioners_network<- function(user, verbose=F, archive.to.csv=F, sleepy=F,
   #This loop goes through each new contact and adds a column to the sociogram for each
   #it continues to update the archive throughout
   contacts<- rownames(sociogram)[-1]
-  if(verbose){print(c("beginning contacts loop, ncontacts=", length(contacts)))}
+  print(c("Processing contacts' mentions, ncontacts=", length(contacts)))
   for (i in 1:length(contacts)){
     if(verbose){print(c("contact:", i, "User ID:",contacts[i]))}
     #get the contact's mentions, limiting to the original user's contacts, and using the archive

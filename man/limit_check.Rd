@@ -4,16 +4,18 @@
 \alias{limit_check}
 \title{limit_check}
 \usage{
-limit_check(tokenstocheck = 1:length(get_tokens()))
+limit_check()
 }
 \arguments{
 \item{tokenstocheck}{a numeric vector specifying which tokens to check. Default is all of them .}
 }
 \description{
-Checks for rate limit issues. For each token, prints all rate limits that have been used
-in the current time frame.
+NOT CURRENTLY FUNCTIONING
 }
 \details{
+Checks for rate limit issues. For each token, prints all rate limits that have been used
+in the current time frame.
+
 Since this function uses the "application/rate_status" rate limit,
 this rate limit will always be printed for each token. If this rate limit is exhausted, the function prints
 a notification of this rather than the standard output for that token.

@@ -4,7 +4,7 @@
 \alias{problem_account_check}
 \title{problem_account_check}
 \usage{
-problem_account_check(users)
+problem_account_check(users, return_info = F)
 }
 \arguments{
 \item{users}{A character vector of user IDs or screen names}
