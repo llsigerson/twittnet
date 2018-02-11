@@ -16,6 +16,10 @@
 #' @return account.problems: information about potential problems with the account
 #' @return sociogram: a matrix with identical rows and columns showing the connections among the user and their
 #' contacts. The user's connection with themselves is marked as "self".
+#' @details If one of the user's contacts has a private or large account, the function will check their connections
+#' by looking at data from other users in the network whose data can be collected.
+#' However, the connections between two accounts that are large or private can't be mapped, so it is marked with an 
+#' NA value.
 
     
 

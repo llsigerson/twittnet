@@ -1,11 +1,15 @@
 Package: twittnet
-Title: What the Package Does (one line, title case)
+Title: Tools for mapping social networks on Twitter
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Leif", "Sigerson", email = "llsigerson@gmail.com", role = c("aut", "cre"))
+Description: Maps level 1.5 ego networks for a given user (i.e., who the user knows, and whether these users know each other). Ties are inherently reciprocal, but can be based on following or mentions.
 Depends: R (>= 3.3.2)
-Imports: rtweet (>= 0.6.0)
-License: What license is it under?
+Imports: 
+  rtweet (>= 0.6.0), 
+  tibble
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1.9000

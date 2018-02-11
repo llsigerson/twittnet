@@ -8,7 +8,8 @@
 #' @param user a user screen name or ID
 #' @param verbose logical. How often the function should print updates on its progress.
 #' @param archive.to.csv logical. If set to TRUE, the archive will be written to a csv file
-#' in the working directory rather than returned in the workspace. 
+#' in the working directory rather than returned in the workspace. Only for users who have at least 
+#' one contact
 #' @param sleepy logical. Used to avoid rate limit issues for users with huge number of contacts (>300).
 #' If true, the function waits 60 seconds after processing each of the user's 
 #' contacts in the first use of the recip_mentioners function (used throughout this function).
@@ -24,7 +25,7 @@
 #' and their contacts. The user's connection with themselves is marked as NA.
 #' @return archive: a tibble containing all tweets sent by the user and their contacts in the specified 
 #' time frame. 
-#' @details Note: this function ignores accounts that are private or suspended.
+#' @details Note: this function ignores contacts whose accounts are private or suspended.
 #' @export  
 
 
@@ -123,12 +124,12 @@ recip_mentioners_network<- function(user, verbose=F, archive.to.csv=F, sleepy=F,
   
   #return output, either writing the archive to a csv or saving it in the list, depending on the call
   if(archive.to.csv){
-    write.csv(reformat_tweets(archive), paste(users[i], "recip_mentioners.archive.csv"))
+    write_as_csv(archive, paste(user, "recip_mentioners.archive.csv"))
     return(list("user"=user, "ncontacts"=  nrow(sociogram)-1, "funcstart"=funcstart, "funcstop"=Sys.time(),
                 "account.problems"=user.problems, "sociogram"=sociogram, "archive"= "Written to CSV"))
   }
   else{
-  return(list("user"=user, "ncontacts"=  nrow(sociogram)-1, "funcstart"=funcstart, "funcstop"=Sys.time(),
+    return(list("user"=user, "ncontacts"=  nrow(sociogram)-1, "funcstart"=funcstart, "funcstop"=Sys.time(),
               "account.problems"=user.problems, "sociogram"=sociogram, "archive"=archive))
   }
   }

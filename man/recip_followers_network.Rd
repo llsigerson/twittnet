@@ -33,3 +33,9 @@ Maps out a user's 1.5 level ego network (who are their contacts, and whether the
 know each other), based on reciprocated following. Repeatedly uses the recip_followers function to accomplish this.
 Tie strength is binary: either two users are connected or they are unconnected.
 }
+\details{
+If one of the user's contacts has a private or large account, the function will check their connections
+by looking at data from other users in the network whose data can be collected.
+However, the connections between two accounts that are large or private can't be mapped, so it is marked with an 
+NA value.
+}

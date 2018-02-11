@@ -13,7 +13,8 @@ recip_mentioners_network(user, verbose = F, archive.to.csv = F,
 \item{verbose}{logical. How often the function should print updates on its progress.}
 
 \item{archive.to.csv}{logical. If set to TRUE, the archive will be written to a csv file
-in the working directory rather than returned in the workspace.}
+in the working directory rather than returned in the workspace. Only for users who have at least 
+one contact}
 
 \item{sleepy}{logical. Used to avoid rate limit issues for users with huge number of contacts (>300).
 If true, the function waits 60 seconds after processing each of the user's 
@@ -46,5 +47,5 @@ compiling an archive of all tweets sent by the user and their contacts in the ti
 is defined as the minimum number of mentions exchanged between two users.
 }
 \details{
-Note: this function ignores accounts that are private or suspended.
+Note: this function ignores contacts whose accounts are private or suspended.
 }
