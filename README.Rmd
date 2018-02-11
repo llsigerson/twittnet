@@ -55,13 +55,14 @@ For a more detailed introduction to this type of network map, see the "Mentions 
 
 
 ### Getting started
-To install:
+To install and view a beginner's guide to the package (the Mentions_mapping vignette):
 ```{r message=FALSE, warning=FALSE, results='hide'}
 if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
 }
 devtools::install_github("llsigerson/twittnet")
 library(twittnet)
+RShowDoc("Mentions_mapping", package = "twittnet", type="html")
 ```
 
 Since this package relies heavily on the rtweet package, it's recommended to have a a look at the [readme](https://github.com/mkearney/rtweet/blob/master/README.Rmd) for that package, which has a complete guide for getting access to Twitter data, and shows some of the other things you can do with rtweet.
