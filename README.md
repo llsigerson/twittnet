@@ -30,24 +30,12 @@ if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
 }
 devtools::install_github("llsigerson/twittnet")
-#> Downloading GitHub repo llsigerson/twittnet@master
-#> from URL https://api.github.com/repos/llsigerson/twittnet/zipball/master
-#> Installing twittnet
-#> "C:/PROGRA~1/R/R-34~1.2/bin/x64/R" --no-site-file --no-environ --no-save  \
-#>   --no-restore --quiet CMD INSTALL  \
-#>   "C:/Users/llsig/AppData/Local/Temp/RtmpMj776e/devtools1d082c6450f9/llsigerson-twittnet-a865057"  \
-#>   --library="C:/Users/llsig/Desktop/Twitter Empirical research/Wave 2  \
-#>   Longitudinal Data  \
-#>   collection/twittnet/packrat/lib/x86_64-w64-mingw32/3.4.2"  \
-#>   --install-tests
-#> 
-#> Reloading installed twittnet
 library(twittnet)
 ```
 
 Since this package relies heavily on the rtweet package, it's recommended to have a a look at the [readme](https://github.com/mkearney/rtweet/blob/master/README.Rmd) for that package, which has a complete guide for getting access to Twitter data, and shows some of the other things you can do with rtweet.
 
-But for a quick setup, simply create a Twitter account, then load twittnet, which will automatically load rtweet as well. Then, run any rtweet function, such as lookup\_users(), and you'll be redirected to Twitter to authorize access via your Twitter account.
+For a quick setup, simply create a Twitter account, then load twittnet, which will automatically load rtweet as well. Then, run any rtweet function, such as lookup\_users(), and you'll be redirected to Twitter to authorize access via your Twitter account.
 
 For a fuller introduction to tokens and Twitter data, check out the rtweet [vignette](https://github.com/mkearney/rtweet/blob/master/vignettes/auth.Rmd).
 
