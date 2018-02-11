@@ -44,7 +44,7 @@ edges<- as.numeric(edges[edges>0])
 ```
 
 We can visualize this network map with ggnet2:
-```{r, plotting, echo=F}
+```{r, plotting, echo=F, fig.height=4}
 ggnet2(net, label=T, edge.label = edges, size=20,color="darkblue", label.trim= 3, layout.par = list(cell.jitter = 0.75),   label.color="white", label.size = 10,edge.color = "cadetblue",  
        edge.label.color = "darkblue", edge.label.size = 10, edge.size = log(edges)+.5)
 
@@ -56,7 +56,7 @@ For a more detailed introduction to this type of network map, see the "Mentions 
 
 ### Getting started
 To install:
-```{r}
+```{r,, results="hide"}
 if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
 }
@@ -66,7 +66,7 @@ library(twittnet)
 
 Since this package relies heavily on the rtweet package, it's recommended to have a a look at the [readme](https://github.com/mkearney/rtweet/blob/master/README.Rmd) for that package, which has a complete guide for getting access to Twitter data, and shows some of the other things you can do with rtweet.
 
-But for a quick setup, simply create a Twitter account, then load twittnet, which will automatically load rtweet as well. Then, run any rtweet function, such as lookup_users(), and you'll be redirected to Twitter to authorize access via your Twitter account. 
+For a quick setup, simply create a Twitter account, then load twittnet, which will automatically load rtweet as well. Then, run any rtweet function, such as lookup_users(), and you'll be redirected to Twitter to authorize access via your Twitter account. 
 
 For a fuller introduction to tokens and Twitter data, check out the rtweet [vignette](https://github.com/mkearney/rtweet/blob/master/vignettes/auth.Rmd).
 

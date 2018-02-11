@@ -81,11 +81,4 @@ ggnet2(net, label=T, edge.label = edges, size=20,color="darkblue", label.trim= 3
 
 ```
 
-
-Last, I'll show how this function handles accounts where the data can't be collected, which can happen if the user ID is wrong, if it's currently suspended by Twitter, or if it's set to private. Here, I'll try to run the recip_mentioners_network function with a user ID that's wrong (notice the automatic warning messages):
-```{r mistaken account, message=F}
-mistaken.network<- recip_mentioners_network("4342324jifo2f2f")
-print(mistaken.network$account.problems)
-```
-
 And there you have it!
