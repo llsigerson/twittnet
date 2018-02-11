@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Leif" />
+
+
+<title>Mentions mapping</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Mentions mapping</h1>
+<h4 class="author"><em>Leif</em></h4>
+<h4 class="date"><em>February 9, 2018</em></h4>
+
+
+
+<hr />
+<p>This vignette will cover the functions for one of the two types of reciprocal network mapping in twittnet: mentions networks. Functions for the other type, following networks, follow similar principles.</p>
+<div id="using-the-recip_mentioners-function" class="section level3">
+<h3>Using the recip_mentioners function</h3>
+<p>First, we can see who this user has been talking to recently with the recip_mentioners function. We’ll look at all conversations with at least two reciprocated mentions (including replies and retweets) in the last month. Though I use the user ID here, the screen name can also be used. However, the functions will only return user ID’s, since can’t be changed by the user.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MH.mentioners&lt;-<span class="st"> </span><span class="kw">recip_mentioners</span>(<span class="dt">user=</span><span class="st">&quot;817544938623737858&quot;</span>, <span class="dt">min.tie=</span> <span class="dv">2</span>, <span class="dt">startday=</span><span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">30</span>, <span class="dt">verbose=</span>F)</code></pre></div>
+<p>The result is a list containing two tibbles: mentions, and archive. In mentions, each row is a different user who’s been talking to the original user, and shows how many mentions the original user gave that contact, how many it received, and the minimum of these two. The contacts are identified by their user ID, rather than their screen name, which can change.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MH.mentioners<span class="op">$</span>mentions[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,]</code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   contact            mentions_given mentions_received   min
+##   &lt;chr&gt;                       &lt;dbl&gt;             &lt;dbl&gt; &lt;dbl&gt;
+## 1 832307520542801920          16.0              89.0  16.0 
+## 2 65739757                     6.00             24.0   6.00
+## 3 151208452                    2.00              4.00  2.00</code></pre>
+<p>We can get user info for each of these contacts with the lookup_users function from rtweet. To see the user ID, number of followers, and number of friends:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">contact.info&lt;-<span class="st"> </span><span class="kw">lookup_users</span>(MH.mentioners<span class="op">$</span>mentions<span class="op">$</span>contact)
+contact.info[,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">8</span>,<span class="dv">9</span>)]</code></pre></div>
+<pre><code>## # A tibble: 3 x 3
+##   user_id            followers_count friends_count
+##   &lt;chr&gt;                        &lt;int&gt;         &lt;int&gt;
+## 1 832307520542801920            2149          1990
+## 2 65739757                      1434           804
+## 3 151208452                     1978           895</code></pre>
+<p>The archive contains all the tweets sent by the user and their contacts in the last month. Here, it has 2202 tweets.</p>
+</div>
+<div id="scaling-up-with-recip_mentioners_network" class="section level3">
+<h3>Scaling up with recip_mentioners_network</h3>
+<p>If we want to see whether the user’s contacts also talk to each other (AKA, a level 1.5 ego network), we can use the recip_mentioners_network function. It uses many of the same parameters as the recip_mentioners function. We’ll look at the same user, with the same minimum tie and timeframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MH.network&lt;-<span class="st"> </span><span class="kw">recip_mentioners_network</span>(<span class="st">&quot;817544938623737858&quot;</span>, <span class="dt">min.tie=</span><span class="dv">2</span>, <span class="dt">startday=</span> <span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">30</span>)</code></pre></div>
+<pre><code>## [1] &quot;No problems found, obtaining user's mentions&quot;
+## [1] &quot;Processing contacts' mentions, ncontacts=&quot;
+## [2] &quot;3&quot;                                        
+## [1] &quot;into the wrong loop&quot;</code></pre>
+<p>Again, the result is a list, but it has some different objects. Instead of the mentions tibble in the previous function, we have the sociogram: a matrix where each cell shows the minimum number of mentions exchanged between two users. The original user is in the first row and column, and their contacts are in the remaining rows and columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MH.network<span class="op">$</span>sociogram[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</code></pre></div>
+<pre><code>##                    817544938623737858 832307520542801920 65739757
+## 817544938623737858                 NA                 16        6
+## 832307520542801920                 16                 NA        5
+## 65739757                            6                  5       NA</code></pre>
+<p>Last, we can use ggnet2 to visualize the user’s conversational network, based on the sociogram. A little cleaning is needed first. I used a quick for loop to extract the edge weights for plotting.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">net&lt;-<span class="st"> </span><span class="kw">network</span>(MH.network<span class="op">$</span>sociogram, <span class="dt">directed =</span> F)
+edges&lt;-<span class="st"> </span><span class="kw">numeric</span>(<span class="dv">0</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>(<span class="kw">nrow</span>(MH.network<span class="op">$</span>sociogram)<span class="op">-</span><span class="dv">1</span>)){
+  edges&lt;-<span class="st"> </span><span class="kw">append</span>(edges, MH.network<span class="op">$</span>sociogram[(i<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="kw">nrow</span>(MH.network<span class="op">$</span>sociogram),i])
+}
+edges&lt;-<span class="st"> </span><span class="kw">as.numeric</span>(edges[edges<span class="op">&gt;</span><span class="dv">0</span>])</code></pre></div>
+<p>Once the data is prepped, we can visualize the network, using ggnet2 with a number of arguments. The nodes are labeled with the first three digits of the user ID’s. Wider lines represent stronger connections.The nodes are labeled with the first three digits of the user ID’s. Wider lines represent stronger connections.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggnet2</span>(net, <span class="dt">label=</span>T, <span class="dt">edge.label =</span> edges, <span class="dt">size=</span><span class="dv">20</span>,<span class="dt">color=</span><span class="st">&quot;darkblue&quot;</span>, <span class="dt">label.trim=</span> <span class="dv">3</span>, <span class="dt">layout.par =</span> <span class="kw">list</span>(<span class="dt">cell.jitter =</span> <span class="fl">0.75</span>),   <span class="dt">label.color=</span><span class="st">&quot;white&quot;</span>, <span class="dt">label.size =</span> <span class="dv">10</span>,<span class="dt">edge.color =</span> <span class="st">&quot;cadetblue&quot;</span>,  
+       <span class="dt">edge.label.color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="dt">edge.label.size =</span> <span class="dv">10</span>, <span class="dt">edge.size =</span> <span class="kw">log</span>(edges)<span class="op">+</span>.<span class="dv">5</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p>Last, I’ll show how this function handles accounts where the data can’t be collected, which can happen if the user ID is wrong, if it’s currently suspended by Twitter, or if it’s set to private. Here, I’ll try to run the recip_mentioners_network function with a user ID that’s wrong (notice the automatic warning messages):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mistaken.network&lt;-<span class="st"> </span><span class="kw">recip_mentioners_network</span>(<span class="st">&quot;4342324jifo2f2f&quot;</span>)</code></pre></div>
+<pre><code>## Warning: Unknown or uninitialised column: 'user_id'.</code></pre>
+<pre><code>## Warning: Unknown or uninitialised column: 'screen_name'.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(mistaken.network<span class="op">$</span>account.problems)</code></pre></div>
+<pre><code>## # A tibble: 1 x 5
+##   User            Wrong.or.Suspended Private No.tweets No.friends.or.foll~
+##   &lt;chr&gt;           &lt;lgl&gt;              &lt;lgl&gt;   &lt;lgl&gt;     &lt;lgl&gt;              
+## 1 4342324jifo2f2f T                  NA      NA        NA</code></pre>
+<p>And there you have it!</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
