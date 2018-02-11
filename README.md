@@ -1,69 +1,27 @@
----
-output:
-  html_document: default
-  pdf_document: default
----
-## twittnet
-Tools for mapping individual social networks on Twitter with R. All functions are built on functions from the excellent package [rtweet by Michael Kearney](https://github.com/mkearney/rtweet). 
 
-### Overview
-These tools are designed to map out local ego networks for Twitter users. These are "1.5 ego" networks, meaning they include the user's connections to their contacts on Twitter, as well as connections among these contacts. 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+twittnet
+========
 
-The tools focus on reciprocated relationships on Twitter, i.e. users who follow or mention each other. This makes more efficient use of the Twitter API's rate limit, and hopefully focuses on connections that are more likely to be meaningful.
+The goal of twittnet is to ...
 
-For example, to create a map of who a user talks to, and whether these users also talk to each other within the last month:
-```{r, load packages, include=FALSE}
-library(twittnet)
-library(tibble)
-library(rtweet)
-library(network)
-library(sna)
-library(GGally)
-library(scales)
+Installation
+------------
 
-```
-``` {r, results="hide"}
-map<- recip_mentioners_network(user="817544938623737858", startday=Sys.Date()-30)
-```
-```{r, include=F}
-net<- network(map$sociogram, directed = F)
-edges<- numeric(0)
-for(i in 1:(nrow(map$sociogram)-1)){
-  edges<- append(edges, map$sociogram[(i+1):nrow(map$sociogram),i])
-}
-edges<- as.numeric(edges[edges>0])
+You can install twittnet from github with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("llsigerson/twittnet")
 ```
 
-We can visualize this network map with ggnet2:
-```{r, plotting, echo=F}
-ggnet2(net, label=T, edge.label = edges, size=20,color="darkblue", label.trim= 3, layout.par = list(cell.jitter = 0.75),   label.color="white", label.size = 10,edge.color = "cadetblue",  
-       edge.label.color = "darkblue", edge.label.size = 10, edge.size = log(edges)+.5)
+Example
+-------
 
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+## basic example code
+print( "It's alive!!!")
+#> [1] "It's alive!!!"
 ```
-
-The primary user is in the middle. 
-
-For a more detailed introduction to this type of network map, see the "Mentions mapping" vignette.
-
-
-### Getting started
-Since this package relies heavily on the rtweet package, it's recommended to have a a look at the [readme](https://github.com/mkearney/rtweet/blob/master/README.Rmd) file for that package, which has a complete guide for getting access to Twitter data, and shows some of the other things you can do with rtweet.
-
-But for a quick setup, simply create a Twitter account, then load twittnet, which will automatically load rtweet as well. Then, run any rtweet function, such as lookup_users(), and you'll be redirected to Twitter to authorize access via your Twitter account. 
-
-For a fuller introduction to tokens and Twitter data, check out the rtweet [vignette](https://github.com/mkearney/rtweet/blob/master/vignettes/auth.Rmd).
-
-Some of twittnet's functions (especially recip_mentioners_network and recip_followers_network) can take a long time to complete. Beginners are recommended to set verbose=T to keep track of the function's progress. Also consider restricting the amount of data you collect, by setting a shorter time frame in the mentions maps, or setting a lower value for max.friends or max.followers in the followers maps.
-
-### Some technical details
-
-The two main types of ties are following and mentions. Following ties are dichotomous (two users are either connected or not). They probably represent more stable, long term relationships on Twitter. However, since no effort is required to maintain these relationships, and because of "follow for follow" practices on Twitter, as well as the ability to mute someone that you follow, there's a risk of these networks including meaningless connections.
-The functions in this repository that are used to map out reciprocated following ties are: recip_followers and recipfollowers_network.
-
-Mention ties are based on reciprocated mentions of each other, which also include retweets and replies. These relationships require active maintenance, and users tend to have fewer of these connections. Since the API only allows access to a user's recent tweets, these ties are less stable. For example, replies between two users in a single thread could look like a very strong relationship, even if they never talk to each other again.  The default for the recipmentioners function is to include all connections that have a minimum of two mentions in the last 30 days, but this is customizable.
-The functions in this repository that are used to map out reciprocated mentions ties are get_tweets, get_mentionees, recip_mentioners, and recip_mentioners_network.
-
-
-### Next steps for the package
-Currently, this package is just the outgrowth of some tools that I made for my own research. I was encouraged to convert it to a package by some supportive members of the R community. I'd love to have input (at any level of expertise), and I'm particularly interested to see what would be helpful for others.
-
