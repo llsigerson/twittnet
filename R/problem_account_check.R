@@ -4,8 +4,11 @@
 #' data collection by other functions in the package
 #' 
 #' @param users A character vector of user IDs or screen names
+#' @param return_info whether to return the full user info as well
 #' @return a logical tibble with 5 columns. Each row notes the user and whether 
 #' the account has any problematic features
+#' @return if return_info=T, a list is returned that includes the same tibble as usual ,
+#' but also a tibble containing all info about the user
 #' 
 #' @details Due to rate limits, this function doesn't work with more than 5000 users at a time. If this is
 #' attempted, the function fails.

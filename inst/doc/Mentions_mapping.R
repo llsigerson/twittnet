@@ -42,7 +42,3 @@ ggnet2(net, label=T, edge.label = edges, size=20,color="darkblue", label.trim= 3
 
 
 
-## ----mistaken account, message=F-----------------------------------------
-mistaken.network<- recip_mentioners_network("4342324jifo2f2f")
-print(mistaken.network$account.problems)
-

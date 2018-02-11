@@ -1,0 +1,84 @@
+---
+title: "Mentions mapping"
+author: "Leif"
+date: "February 9, 2018"
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mentions mapping}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, load packages, include=FALSE}
+library(twittnet)
+library(tibble)
+library(rtweet)
+library(network)
+library(sna)
+library(GGally)
+library(scales)
+
+```
+
+This vignette will cover the functions for one of the two types of reciprocal network mapping in twittnet: mentions networks. Functions for the other type, following networks, follow similar principles.
+
+### Using the recip_mentioners function
+First, we can see who this user has been talking to recently with the recip_mentioners function. We'll look at all conversations with at least two reciprocated mentions (including replies and retweets) in the last month. Though I
+use the user ID here, the screen name can also be used. However, the functions will only return user ID's, since can't be changed by the user.
+
+```{r, recip_mentioners}
+MH.mentioners<- recip_mentioners(user="817544938623737858", min.tie= 2, startday=Sys.Date()-30, verbose=F)
+```
+
+The result is a list containing two tibbles: mentions, and archive. In mentions, each row is a different user who's been talking to the original user, and shows how many mentions the original user gave that contact, how many it received, and the minimum of these two. The contacts are identified by their user ID, rather than their screen name, which can change.
+```{r check mentions}
+MH.mentioners$mentions[1:3,]
+```
+We can get user info for each of these contacts with the lookup_users function from rtweet. To see the user ID, number of followers, and number of friends:
+```{r check mentions contacts}
+contact.info<- lookup_users(MH.mentioners$mentions$contact)
+contact.info[,c(1,8,9)]
+```
+
+The archive contains all the tweets sent by the user and their contacts in the last month. Here, it has `r nrow(MH.mentioners$archive)` tweets. 
+
+### Scaling up with recip_mentioners_network
+
+If we want to see whether the user's contacts also talk to each other (AKA, a level 1.5 ego network), we can use the recip_mentioners_network function. It uses many of the same parameters as the recip_mentioners function. We'll look at the same user, with the same minimum tie and timeframe.
+```{r recip_mentioners_network}
+MH.network<- recip_mentioners_network("817544938623737858", min.tie=2, startday= Sys.Date()-30)
+```
+
+
+
+Again, the result is a list, but it has some different objects. Instead of the mentions tibble in the previous function, we have the sociogram: a matrix where each cell shows the minimum number of mentions exchanged between two users. The original user is in the first row and column, and their contacts are in the remaining rows and columns. 
+```{r check sociogram}
+MH.network$sociogram[1:3,1:3]
+```
+
+Last, we can use ggnet2 to visualize the user's conversational network, based on the sociogram. A little cleaning is needed first. I used a quick for loop to extract the edge weights for plotting.
+```{r prep for vis}
+net<- network(MH.network$sociogram, directed = F)
+edges<- numeric(0)
+for(i in 1:(nrow(MH.network$sociogram)-1)){
+  edges<- append(edges, MH.network$sociogram[(i+1):nrow(MH.network$sociogram),i])
+}
+edges<- as.numeric(edges[edges>0])
+
+```
+
+Once the data is prepped, we can visualize the network, using ggnet2 with a number of arguments. The nodes are labeled with the first three digits of the user ID's. Wider lines represent stronger connections.The nodes are labeled with the first three digits of the user ID's. Wider lines represent stronger connections.
+```{r, summary_plot, fig.height=8}
+ggnet2(net, label=T, edge.label = edges, size=20,color="darkblue", label.trim= 3, layout.par = list(cell.jitter = 0.75),   label.color="white", label.size = 10,edge.color = "cadetblue",  
+       edge.label.color = "darkblue", edge.label.size = 10, edge.size = log(edges)+.5)
+
+
+```
+
+And there you have it!

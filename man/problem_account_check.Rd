@@ -8,10 +8,15 @@ problem_account_check(users, return_info = F)
 }
 \arguments{
 \item{users}{A character vector of user IDs or screen names}
+
+\item{return_info}{whether to return the full user info as well}
 }
 \value{
 a logical tibble with 5 columns. Each row notes the user and whether 
 the account has any problematic features
+
+if return_info=T, a list is returned that includes the same tibble as usual ,
+but also a tibble containing all info about the user
 }
 \description{
 Checks for various problems with accounts that preclude further
