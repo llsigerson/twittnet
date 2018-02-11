@@ -68,7 +68,7 @@ edges<- as.numeric(edges[edges>0])
 ```
 
 Once the data is prepped, we can visualize the network, using ggnet2 with a number of arguments. The nodes are labeled with the first three digits of the user ID's. Wider lines represent stronger connections.The nodes are labeled with the first three digits of the user ID's. Wider lines represent stronger connections.
-```{r, summary_plot, fig.height=8}
+```{r, summary_plot, fig.height=8, fig.width=10}
 ggnet2(net, label=T, edge.label = edges, size=20,color="darkblue", label.trim= 3, layout.par = list(cell.jitter = 0.75),   label.color="white", label.size = 10,edge.color = "cadetblue",  
        edge.label.color = "darkblue", edge.label.size = 10, edge.size = log(edges)+.5)
 

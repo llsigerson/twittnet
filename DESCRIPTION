@@ -3,10 +3,7 @@ Title: Tools for mapping social networks on Twitter
 Version: 0.0.0.9000
 Authors@R: person("Leif", "Sigerson", email = "llsigerson@gmail.com", role = c("aut", "cre"))
 Description: Maps level 1.5 ego networks for a given user (i.e., who the user knows, and whether these users know each other). Ties are inherently reciprocal, but can be based on following or mentions.
-Depends: R (>= 3.3.2)
-Imports: 
-  rtweet (>= 0.6.0), 
-  tibble
+Depends: R (>= 3.3.2), rtweet (>= 0.6.0), tibble (>= 1.4.2)
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 License: GPL-2
